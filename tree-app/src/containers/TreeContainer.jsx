@@ -1,22 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import TreeView from '../components/TreeView';
 
-const getInitialTree = () => [
-  { id: 1, name: 'Node 1', children: [] },
-  { id: 2, name: 'Node 2', children: [] },
-  { id: 3, name: 'Node 3', children: [] },
-  { id: 4, name: 'Node 4', children: [] },
-  { id: 5, name: 'Node 5', children: [] },
-];
-
 const TreeContainer = () => {
-  const [tree, setTree] = useState(getInitialTree());
+  const initialTree = useMemo(() => [
+    { id: 1, name: 'Node 1', children: [] },
+    { id: 2, name: 'Node 2', children: [] },
+    { id: 3, name: 'Node 3', children: [] },
+    { id: 4, name: 'Node 4', children: [] },
+    { id: 5, name: 'Node 5', children: [] },
+  ], []);
+
+  const [tree, setTree] = useState(initialTree);
   const [nextId, setNextId] = useState(6);
   const [editingNodeId, setEditingNodeId] = useState(null);
   const [editValue, setEditValue] = useState('');
 
   const resetTree = () => {
-    setTree(getInitialTree());
+    setTree(initialTree);
     setNextId(6);
     setEditingNodeId(null);
     setEditValue('');
