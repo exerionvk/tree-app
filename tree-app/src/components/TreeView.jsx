@@ -1,12 +1,12 @@
 import React from 'react';
 import TreeNode from './TreeNode';
-import '../index.css';
+import styles from './TreeView.module.scss';
 
 const TreeView = ({ tree, onAdd, onRemove, onEdit, editingNodeId, editValue, onEditChange, onEditSave, onEditStart }) => {
   return (
-    <div className="tree-app">
-      <h1 className="tree-title">Древовидная структура</h1>
-      <div className="tree-view">
+    <div className={styles.app}>
+      <h1 className={styles.title}>Древовидная структура</h1>
+      <div className={styles.view}>
         {tree.map((node) => (
           <TreeNode
             key={node.id}

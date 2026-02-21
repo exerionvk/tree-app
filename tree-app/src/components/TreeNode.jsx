@@ -1,5 +1,6 @@
 import React from 'react';
 import { hasChildren } from '../utils/treeUtils';
+import styles from './TreeNode.module.scss';
 
 const TreeNode = ({ 
   node, 
@@ -16,8 +17,8 @@ const TreeNode = ({
   const isEditing = editingNodeId === node.id;
 
   return (
-    <div className={`tree-node ${isRoot ? 'tree-node-root' : ''}`}>
-      <div className="tree-node-content">
+    <div className={`${styles.node} ${isRoot ? styles.nodeRoot : ''}`}>
+      <div className={styles.content}>
         {isEditing ? (
           <input
             type="text"
@@ -25,31 +26,31 @@ const TreeNode = ({
             onChange={onEditChange}
             onBlur={onEditSave}
             onKeyDown={(e) => e.key === 'Enter' && onEditSave()}
-            className="tree-node-input"
+            className={styles.input}
             autoFocus
           />
         ) : (
-          <span className={`tree-node-name ${hasChildren(node) ? 'has-children' : ''}`}>
+          <span className={`${styles.name} ${hasChildren(node) ? styles.hasChildren  : ''}`}>
             {node.name}
           </span>
         )}
 
-        <div className="tree-node-buttons">
+        <div className={styles.buttons}>
           <button 
             onClick={() => onAdd(node.id)}
-            className="tree-node-btn tree-node-btn-add"
+            className={`${styles.btn} ${styles.btnAdd}`}
           >
             Add
           </button>
           <button 
             onClick={() => onRemove(node.id)}
-            className="tree-node-btn tree-node-btn-remove"
+            className={`${styles.btn} ${styles.btnRemove}`}
           >
             Remove
           </button>
           <button 
             onClick={() => onEditStart(node.id, node.name)}
-            className="tree-node-btn tree-node-btn-edit"
+            className={`${styles.btn} ${styles.btnEdit}`}
           >
             Edit
           </button>

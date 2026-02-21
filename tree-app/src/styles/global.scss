@@ -1,0 +1,62 @@
+:root {
+  // Основные цвета
+  --primary-color: #3b82f6;
+  --primary-dark: #2563eb;
+  
+  --success-color: #10b981;
+  --success-dark: #059669;
+  
+  --danger-color: #ef4444;
+  --danger-dark: #dc2626;
+  
+  --warning-color: #f59e0b;
+  --warning-dark: #d97706;
+  
+  --gray-color: #64748b;
+  --gray-dark: #475569;
+  
+  // Дополнительные цвета
+  --light-gray: #e4e7eb;
+  --text-color: #1e293b;
+  --bg-color: #f0f2f5;
+  --white: #ffffff;
+}
+
+// Глобальные стили
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  background: var(--bg-color);
+  min-height: 100vh;
+  padding: 30px 20px;
+}
+
+// Миксины
+@mixin button-base {
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: white;
+}
+
+@mixin hover-lift {
+  transition: all 0.2s ease;
+  
+  &:hover {
+    transform: translateY(-1px);
+  }
+}

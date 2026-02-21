@@ -1,6 +1,7 @@
 import React from 'react';
 import TreeView from '../components/TreeView';
 import { useTree } from '../hooks/useTree';
+import styles from '../components/TreeView.module.scss';
 
 const TreeContainer = () => {
   const {
@@ -29,8 +30,8 @@ const TreeContainer = () => {
         onEditSave={saveEdit}
         onEditStart={startEdit}
       />
-      <div className="tree-reset-container">
-        <button onClick={resetTree} className="tree-reset-btn">
+      <div className={styles.resetContainer}>
+        <button onClick={resetTree} className={styles.resetBtn}>
           Reset Tree
         </button>
       </div>

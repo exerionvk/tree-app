@@ -1,0 +1,65 @@
+// src/components/TreeView.module.scss
+@import '../styles/global.scss';
+
+.app {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.title {
+  color: var(--text-color);
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 25px;
+  padding-bottom: 10px;
+  border-bottom: 3px solid var(--primary-color);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  
+  &::before {
+    content: "🌳";
+    font-size: 32px;
+  }
+}
+
+.view {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--light-gray);
+}
+
+.resetContainer {
+  margin-top: 30px;
+  text-align: center;
+  padding: 20px;
+  border-top: 2px dashed var(--light-gray);
+}
+
+.resetBtn {
+  background: var(--gray-color);
+  color: white;
+  border: none;
+  padding: 12px 40px;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  
+  &:hover {
+    background: var(--gray-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(100, 116, 139, 0.3);
+  }
+  
+  &::before {
+    content: "🔄";
+    font-size: 18px;
+  }
+}
