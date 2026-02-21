@@ -1,5 +1,11 @@
 import React, { useState, useMemo } from 'react';
 import TreeView from '../components/TreeView';
+import { 
+  addNodeToTree, 
+  removeNodeFromTree, 
+  editNodeInTree,
+  findNodeById 
+} from '../utils/treeUtils';
 
 const TreeContainer = () => {
   const initialTree = useMemo(() => [
@@ -22,55 +28,33 @@ const TreeContainer = () => {
     setEditValue('');
   };
 
-  const findNodeById = (nodes, id) => {
-    for (const node of nodes) {
-      if (node.id === id) return node;
-      if (node.children.length > 0) {
-        const found = findNodeById(node.children, id);
-        if (found) return found;
-      }
-    }
-    return null;
-  };
-
   const addNode = (parentId) => {
-    const newTree = JSON.parse(JSON.stringify(tree));
-    const parent = findNodeById(newTree, parentId);
-    if (parent) {
-      parent.children.push({
-        id: nextId,
-        name: `Node ${nextId}`,
-        children: [],
-      });
-      setNextId(nextId + 1);
+    const newNode = {
+      id: nextId,
+      name: `Node ${nextId}`,
+      children: [],
+    };
+    
+    const { newTree, success } = addNodeToTree(tree, parentId, newNode);
+    
+    if (success) {
       setTree(newTree);
+      setNextId(nextId + 1);
     }
   };
 
   const removeNode = (id) => {
-    const removeRecursive = (nodes, targetId) => {
-      return nodes.filter((node) => {
-        if (node.id === targetId) return false;
-        node.children = removeRecursive(node.children, targetId);
-        return true;
-      });
-    };
-    setTree(removeRecursive(JSON.parse(JSON.stringify(tree)), id));
+    const newTree = removeNodeFromTree(tree, id);
+    setTree(newTree);
+    
     if (editingNodeId === id) {
       setEditingNodeId(null);
     }
   };
 
   const editNode = (id, newName) => {
-    const editRecursive = (nodes) => {
-      return nodes.map((node) => {
-        if (node.id === id) {
-          return { ...node, name: newName };
-        }
-        return { ...node, children: editRecursive(node.children) };
-      });
-    };
-    setTree(editRecursive([...tree]));
+    const newTree = editNodeInTree(tree, id, newName);
+    setTree(newTree);
   };
 
   const startEdit = (id, currentName) => {

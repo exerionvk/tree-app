@@ -1,4 +1,5 @@
 import React from 'react';
+import { hasChildren } from '../utils/treeUtils';
 
 const TreeNode = ({ 
   node, 
@@ -13,7 +14,6 @@ const TreeNode = ({
   isRoot = false
 }) => {
   const isEditing = editingNodeId === node.id;
-  const hasChildren = node.children && node.children.length > 0;
 
   return (
     <div className={`tree-node ${isRoot ? 'tree-node-root' : ''}`}>
@@ -29,7 +29,7 @@ const TreeNode = ({
             autoFocus
           />
         ) : (
-          <span className={`tree-node-name ${hasChildren ? 'has-children' : ''}`}>
+          <span className={`tree-node-name ${hasChildren(node) ? 'has-children' : ''}`}>
             {node.name}
           </span>
         )}
