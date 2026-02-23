@@ -4,9 +4,7 @@ import './styles/global.scss';
 
 const App: React.FC = () => {
   return (
-    <div className="App">
       <TreeContainer />
-    </div>
   );
 };
 
