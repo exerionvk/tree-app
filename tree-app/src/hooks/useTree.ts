@@ -1,12 +1,14 @@
 import { useState, useMemo, useCallback } from 'react';
+import { TreeNode, UseTreeReturn } from '../types/tree.types';
 import { 
   addNodeToTree, 
   removeNodeFromTree, 
   editNodeInTree 
 } from '../utils/treeUtils';
 
-export const useTree = () => {
-  const initialTree = useMemo(() => [
+export const useTree = (): UseTreeReturn => {
+  // Мемоизируем начальное состояние
+  const initialTree = useMemo<TreeNode[]>(() => [
     { id: 1, name: 'Node 1', children: [] },
     { id: 2, name: 'Node 2', children: [] },
     { id: 3, name: 'Node 3', children: [] },
@@ -14,20 +16,22 @@ export const useTree = () => {
     { id: 5, name: 'Node 5', children: [] },
   ], []);
 
-  const [tree, setTree] = useState(initialTree);
-  const [nextId, setNextId] = useState(6);
-  const [editingNodeId, setEditingNodeId] = useState(null);
-  const [editValue, setEditValue] = useState('');
+  const [tree, setTree] = useState<TreeNode[]>(initialTree);
+  const [nextId, setNextId] = useState<number>(6);
+  const [editingNodeId, setEditingNodeId] = useState<number | null>(null);
+  const [editValue, setEditValue] = useState<string>('');
 
-  const resetTree = useCallback(() => {
+  // Сброс дерева
+  const resetTree = useCallback((): void => {
     setTree(initialTree);
     setNextId(6);
     setEditingNodeId(null);
     setEditValue('');
   }, [initialTree]);
 
-  const addNode = useCallback((parentId) => {
-    const newNode = {
+  // Добавление узла
+  const addNode = useCallback((parentId: number): void => {
+    const newNode: TreeNode = {
       id: nextId,
       name: `Node ${nextId}`,
       children: [],
@@ -41,28 +45,33 @@ export const useTree = () => {
     }
   }, [tree, nextId]);
 
-  const removeNode = useCallback((id) => {
+  // Удаление узла
+  const removeNode = useCallback((id: number): void => {
     const newTree = removeNodeFromTree(tree, id);
     setTree(newTree);
     
     setEditingNodeId(prevId => prevId === id ? null : prevId);
   }, [tree]);
 
-  const editNode = useCallback((id, newName) => {
+  // Редактирование узла
+  const editNode = useCallback((id: number, newName: string): void => {
     const newTree = editNodeInTree(tree, id, newName);
     setTree(newTree);
   }, [tree]);
 
-  const startEdit = useCallback((id, currentName) => {
+  // Начать редактирование
+  const startEdit = useCallback((id: number, currentName: string): void => {
     setEditingNodeId(id);
     setEditValue(currentName);
   }, []);
 
-  const handleEditChange = useCallback((e) => {
+  // Изменение значения при редактировании
+  const handleEditChange = useCallback((e: React.ChangeEvent<HTMLInputElement>): void => {
     setEditValue(e.target.value);
   }, []);
 
-  const saveEdit = useCallback(() => {
+  // Сохранить редактирование
+  const saveEdit = useCallback((): void => {
     if (editingNodeId && editValue.trim()) {
       editNode(editingNodeId, editValue);
       setEditingNodeId(null);

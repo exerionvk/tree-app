@@ -1,8 +1,9 @@
 import React from 'react';
+import { TreeNode as TreeNodeType, TreeNodeProps } from '../types/tree.types';
 import { hasChildren } from '../utils/treeUtils';
 import styles from './TreeNode.module.scss';
 
-const TreeNode = ({ 
+const TreeNode: React.FC<TreeNodeProps> = ({ 
   node, 
   onAdd, 
   onRemove, 
@@ -25,12 +26,12 @@ const TreeNode = ({
             value={editValue}
             onChange={onEditChange}
             onBlur={onEditSave}
-            onKeyDown={(e) => e.key === 'Enter' && onEditSave()}
+            onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => e.key === 'Enter' && onEditSave()}
             className={styles.input}
             autoFocus
           />
         ) : (
-          <span className={`${styles.name} ${hasChildren(node) ? styles.hasChildren  : ''}`}>
+          <span className={`${styles.name} ${hasChildren(node) ? styles.hasChildren : ''}`}>
             {node.name}
           </span>
         )}
@@ -57,7 +58,7 @@ const TreeNode = ({
         </div>
       </div>
 
-      {node.children.map((child) => (
+      {node.children.map((child: TreeNodeType) => (
         <TreeNode
           key={child.id}
           node={child}

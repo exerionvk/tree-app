@@ -1,8 +1,19 @@
 import React from 'react';
 import TreeNode from './TreeNode';
+import { TreeViewProps } from '../types/tree.types';
 import styles from './TreeView.module.scss';
 
-const TreeView = ({ tree, onAdd, onRemove, onEdit, editingNodeId, editValue, onEditChange, onEditSave, onEditStart }) => {
+const TreeView: React.FC<TreeViewProps> = ({ 
+  tree, 
+  onAdd, 
+  onRemove, 
+  onEdit, 
+  editingNodeId, 
+  editValue, 
+  onEditChange, 
+  onEditSave, 
+  onEditStart 
+}) => {
   return (
     <div className={styles.app}>
       <h1 className={styles.title}>Древовидная структура</h1>

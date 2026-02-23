@@ -3,7 +3,7 @@ import TreeView from '../components/TreeView';
 import { useTree } from '../hooks/useTree';
 import styles from '../components/TreeView.module.scss';
 
-const TreeContainer = () => {
+const TreeContainer: React.FC = () => {
   const {
     tree,
     editingNodeId,
