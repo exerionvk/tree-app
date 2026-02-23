@@ -16,4 +16,4 @@
 npm install
 
 ## Запустить в режиме разработки
-npm run build
+npm run dev
